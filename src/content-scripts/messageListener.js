@@ -9,8 +9,7 @@ export const messageListener = (request, sender, sendResponse) => {
         window[functionToCall].apply(null, parameters);
       } else {
         switch (functionToCall) {
-          case 'check':
-            console.log('Hy');
+          case 'getStockFromFrontend':
             sendResponse('hey');
             break;
           default:

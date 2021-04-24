@@ -1,13 +1,13 @@
 <template>
-  <hello-world />
+  <index />
 </template>
 
 <script>
-import HelloWorld from '@/components/HelloWorld.vue'
+import Index from '@/components/Index.vue'
 
 export default {
   name: 'App',
-  components: { HelloWorld }
+  components: { Index }
 }
 </script>
 

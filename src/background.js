@@ -8,10 +8,9 @@ const messageListener = ( request, sender, sendResponse) => {
   } else {
   if( action == 'callAPI'){
     switch(functionToCall) {
-    case 'Test':
-    console.log('Message From BG',sender,parameters);
-    sendResponse('hi');
-    break;
+    case 'getStockNews': 
+    console.log('getNews');
+    sendResponse([]);
     default:
     break;
     }
