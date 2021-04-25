@@ -16,4 +16,7 @@ html {
   width: 400px;
   height: 400px;
 }
+body{
+  margin:0;
+}
 </style>
