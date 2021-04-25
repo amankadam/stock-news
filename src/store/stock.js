@@ -10,39 +10,45 @@ export default {
             state[obj.name] = obj.data;
         },
         setStockRelatedArticles(state,obj){
-            state[obj.name] = obj.datal;
+            state[obj.name] = obj.data;
         }
     },
     actions: {
-        async getStockNews({ commit }, data){
-            try {
+        async getStockNews({commit,state}){
+            try { 
                 const getStockDetails = await sendMessageToBackgroundScript({
                     action: 'callAPI',
                     functionToCall: 'getStockNews',
                     parameters: {
-                        stockName: data.stock
+                        stockName: state.stockName
                     }
                 });
-                commit("stock/setStockRelatedArticles",{
+                commit("setStockRelatedArticles",{
                     name: 'stockRelatedArticles',
-                    data: data
+                    data: getStockDetails
                 })
-                console.log(getStockDetails);
             } catch( err) {
                 throw Error(err);
             }
         },
-        async setStock({ commit }, data) {
-            console.log(data);
-         commit("stock/setData",{
+        async setStock({ commit, dispatch }, data) {
+         commit("setStock",{
              name: "stockName",
              data: data
-         })
+         });
+         try {
+         await dispatch("getStockNews");
+        } catch(err){
+            console.error(err);
+        }
         }
     },
     getters: {
        stockName(state){
            return state.stockName;
+       },
+       stockRelatedArticles(state){
+           return state.stockRelatedArticles;
        } 
     }
 }

@@ -1,5 +1,6 @@
+import { getStockFromFrontend } from "./get-stock-from-frontend";
+
 export const messageListener = (request, sender, sendResponse) => {
-   console.log(request);
   
   if (!sender.tab) {
     const { action, functionToCall } = request;
@@ -10,7 +11,13 @@ export const messageListener = (request, sender, sendResponse) => {
       } else {
         switch (functionToCall) {
           case 'getStockFromFrontend':
-            sendResponse('hey');
+            getStockFromFrontend()
+            .then( result => {
+              sendResponse(result);
+            }).catch(error => {
+               console.error(error);
+               throw Error(error);
+            });
             break;
           default:
             break;

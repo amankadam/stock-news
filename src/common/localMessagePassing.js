@@ -8,10 +8,8 @@ const onResponseHandler = (response, resolve, reject) => {
 
 export const sendMessageToContentViaPromise = (oRequestBody, tabId) => {
   return new Promise((resolve, reject) => {
-    console.log(tabId);
     if (tabId) {
       browser.tabs.sendMessage(tabId, oRequestBody).then(response => {
-        console.log(tabId);
         onResponseHandler(response, resolve, reject);
       });
     } else {
@@ -27,7 +25,7 @@ export const sendMessageToBackgroundScript = oRequestBody => {
     if (!browser.runtime.lastError) {
       browser.runtime
         .sendMessage(oRequestBody)
-        .then(response => onResponseHandler(response, resolve, reject))
+        .then(response =>  onResponseHandler(response, resolve, reject))
         .catch(response => onResponseHandler(response, resolve, reject));
     }
   });
